@@ -16,8 +16,7 @@ npm i @uay13211/use-draggable
 
 ```tsx
 import React from "react";
-import {Resizable} from "@uay13211/use-draggable/component/Resizable";
-import {useDraggable} from "@uay13211/use-draggable/hooks/useDraggable";
+import {Resizable, useDraggable} from "@uay13211/use-draggable";
 
 export const DraggableResizableDemo = React.memo(() => {
     const draggableRef = React.useRef<HTMLDivElement | null>(null);
