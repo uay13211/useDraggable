@@ -1,4 +1,4 @@
-## use-draggable
+## @uay13211/use-draggable
 
 provide a react hook for creating draggable and resizable element
 
@@ -6,18 +6,18 @@ provide a react hook for creating draggable and resizable element
 
 ```sh
 #PNPM
-pnpm add use-draggable
+pnpm add @uay13211/use-draggable
 
 #NPM
-npm i use-draggable
+npm i @uay13211/use-draggable
 ```
 
 # Simple example
 
 ```tsx
 import React from "react";
-import {Resizable} from "use-draggable/component/Resizable";
-import {useDraggable} from "use-draggable/hooks/useDraggable";
+import {Resizable} from "@uay13211/use-draggable/component/Resizable";
+import {useDraggable} from "@uay13211/use-draggable/hooks/useDraggable";
 
 export const DraggableResizableDemo = React.memo(() => {
     const draggableRef = React.useRef<HTMLDivElement | null>(null);
