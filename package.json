@@ -1,11 +1,18 @@
 {
-    "name": "usedraggable",
+    "name": "use-draggable",
+    "author": "uay13211",
     "private": true,
     "version": "1.0.0",
-    "type": "module",
+    "license": "MIT",
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/uay13211/useDraggable"
+    },
     "scripts": {
         "start": "vite",
-        "build": "tsc -p ./tsconfig.build.json"
+        "build": "tsc -p ./tsconfig.build.json && cp ./package.json ./dist/package.json",
+        "prepublishOnly": "pnpm run build"
     },
     "dependencies": {
         "classnames": "2.3.2",

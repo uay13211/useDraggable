@@ -16,7 +16,7 @@
         "declarationMap": true,
         "outDir": "./dist"
     },
-    "include": ["src/hooks", "src/component"],
+    "include": ["src/index.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
   
