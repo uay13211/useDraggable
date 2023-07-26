@@ -1,7 +1,6 @@
 {
     "name": "use-draggable",
     "author": "uay13211",
-    "private": true,
     "version": "1.0.0",
     "license": "MIT",
     "main": "./index.js",
