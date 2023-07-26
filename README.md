@@ -14,7 +14,7 @@ npm i use-draggable
 
 # Simple example
 
-```typescript
+```tsx
 import React from "react";
 import {Resizable} from "use-draggable/component/Resizable";
 import {useDraggable} from "use-draggable/hooks/useDraggable";
