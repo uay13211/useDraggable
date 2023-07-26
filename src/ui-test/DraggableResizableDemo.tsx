@@ -1,6 +1,6 @@
 import React from "react";
-import {Resizable} from "./component/Resizable";
-import {useDraggable} from "./hooks/useDraggable";
+import {Resizable} from "../component/Resizable";
+import {useDraggable} from "../hooks/useDraggable";
 
 export const DraggableResizableDemo = React.memo(() => {
     const draggableRef = React.useRef<HTMLDivElement | null>(null);
