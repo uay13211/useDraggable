@@ -3,7 +3,6 @@ import {Resizer} from "./Resizer";
 import classNames from "classnames";
 import type {DragState} from "../../hooks/useDraggable/type";
 import {useCompositeRef} from "../../hooks/useCompositeRef";
-import "./index.less";
 
 interface Rect {
     top: number;
@@ -25,6 +24,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     maxWidth?: number;
     gap?: number;
 }
+
+const RESIZER_THICKNESS = 8;
 
 export const Resizable = React.forwardRef<HTMLDivElement, Props>(
     ({initialHeight, initialWidth, x, y, className, style, gap, children, maxHeight = window.innerHeight, maxWidth = window.innerWidth, minHeight = 0, minWidth = 0, ...restProps}, ref) => {
@@ -88,10 +89,32 @@ export const Resizable = React.forwardRef<HTMLDivElement, Props>(
         };
 
         return (
-            <div className={classNames("g-resizable", className)} ref={compositeRef} style={{...style, height: initialHeight, width: initialWidth, top: y, left: x}} {...restProps}>
-                <Resizer className="top" onResizeStart={onResizeStart} onResize={onResizeTop} gap={gap} />
+            <div
+                className={classNames("g-resizable", className)}
+                ref={compositeRef}
+                style={{position: "fixed", zIndex: 99, border: "1px solid #333", height: initialHeight, width: initialWidth, top: y, left: x, ...style}}
+                {...restProps}
+            >
                 <Resizer
-                    className="top-right"
+                    style={{
+                        cursor: "ns-resize",
+                        top: -RESIZER_THICKNESS / 2,
+                        left: RESIZER_THICKNESS / 2,
+                        width: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                        height: RESIZER_THICKNESS,
+                    }}
+                    onResizeStart={onResizeStart}
+                    gap={gap}
+                    onResize={onResizeTop}
+                />
+                <Resizer
+                    style={{
+                        cursor: "nesw-resize",
+                        width: 2 * RESIZER_THICKNESS,
+                        height: 2 * RESIZER_THICKNESS,
+                        top: -RESIZER_THICKNESS,
+                        left: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                    }}
                     gap={gap}
                     onResizeStart={onResizeStart}
                     onResize={state => {
@@ -99,9 +122,26 @@ export const Resizable = React.forwardRef<HTMLDivElement, Props>(
                         onResizeRight(state);
                     }}
                 />
-                <Resizer className="right" gap={gap} onResizeStart={onResizeStart} onResize={onResizeRight} />
                 <Resizer
-                    className="bottom-right"
+                    style={{
+                        cursor: "ew-resize",
+                        top: RESIZER_THICKNESS / 2,
+                        left: `calc(100% - ${RESIZER_THICKNESS / 2}px)`,
+                        width: RESIZER_THICKNESS,
+                        height: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                    }}
+                    gap={gap}
+                    onResizeStart={onResizeStart}
+                    onResize={onResizeRight}
+                />
+                <Resizer
+                    style={{
+                        cursor: "nwse-resize",
+                        width: 2 * RESIZER_THICKNESS,
+                        height: 2 * RESIZER_THICKNESS,
+                        top: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                        left: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                    }}
                     gap={gap}
                     onResizeStart={onResizeStart}
                     onResize={state => {
@@ -109,9 +149,26 @@ export const Resizable = React.forwardRef<HTMLDivElement, Props>(
                         onResizeBottom(state);
                     }}
                 />
-                <Resizer className="bottom" gap={gap} onResizeStart={onResizeStart} onResize={onResizeBottom} />
                 <Resizer
-                    className="bottom-left"
+                    style={{
+                        cursor: "ns-resize",
+                        top: `calc(100% - ${RESIZER_THICKNESS / 2}px)`,
+                        left: RESIZER_THICKNESS / 2,
+                        width: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                        height: RESIZER_THICKNESS,
+                    }}
+                    gap={gap}
+                    onResizeStart={onResizeStart}
+                    onResize={onResizeBottom}
+                />
+                <Resizer
+                    style={{
+                        cursor: "nesw-resize",
+                        width: 2 * RESIZER_THICKNESS,
+                        height: 2 * RESIZER_THICKNESS,
+                        top: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                        left: -RESIZER_THICKNESS,
+                    }}
                     gap={gap}
                     onResizeStart={onResizeStart}
                     onResize={state => {
@@ -119,9 +176,26 @@ export const Resizable = React.forwardRef<HTMLDivElement, Props>(
                         onResizeLeft(state);
                     }}
                 />
-                <Resizer className="left" gap={gap} onResizeStart={onResizeStart} onResize={onResizeLeft} />
                 <Resizer
-                    className="top-left"
+                    style={{
+                        cursor: "ew-resize",
+                        top: RESIZER_THICKNESS / 2,
+                        left: -RESIZER_THICKNESS / 2,
+                        width: RESIZER_THICKNESS,
+                        height: `calc(100% - ${RESIZER_THICKNESS}px)`,
+                    }}
+                    gap={gap}
+                    onResizeStart={onResizeStart}
+                    onResize={onResizeLeft}
+                />
+                <Resizer
+                    style={{
+                        cursor: "nwse-resize",
+                        width: 2 * RESIZER_THICKNESS,
+                        height: 2 * RESIZER_THICKNESS,
+                        top: -RESIZER_THICKNESS,
+                        left: -RESIZER_THICKNESS,
+                    }}
                     gap={gap}
                     onResizeStart={onResizeStart}
                     onResize={state => {

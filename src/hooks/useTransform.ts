@@ -34,18 +34,23 @@ export function useTransform(target: React.RefObject<HTMLElement>) {
     };
 
     const to = (options: Option) => {
-        if (target.current) {
-            const {x, y, z} = options;
-            const format = (value: string | number | undefined) => (value ? (typeof value === "string" ? value : `${value}px`) : "0");
-            setTransition(target.current, options);
-            target.current.style.transform = `translate3d(${format(x)}, ${format(y)}, ${format(z)})`;
-        }
+        const {x, y, z} = options;
+        const format = (value: string | number | undefined) => (value ? (typeof value === "string" ? value : `${value}px`) : "0");
+        requestAnimationFrame(() => {
+            if (target.current) {
+                setTransition(target.current, options);
+                target.current.style.transform = `translate3d(${format(x)}, ${format(y)}, ${format(z)})`;
+            }
+        });
     };
 
     const clear = () => {
-        if (target.current) {
-            clearTransition(target.current);
-        }
+        requestAnimationFrame(() => {
+            if (target.current) {
+                target.current.style.transform = "";
+                clearTransition(target.current);
+            }
+        });
     };
 
     return {to, clear};
